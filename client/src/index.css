@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(221, 83%, 53%);
+  --primary-foreground: hsl(210, 40%, 98%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* TruthLens specific colors */
+  --hero-gradient-start: hsl(221, 83%, 53%);
+  --hero-gradient-end: hsl(224, 76%, 48%);
+  --success: hsl(142, 76%, 36%);
+  --success-bg: hsl(138, 76%, 97%);
+  --success-border: hsl(142, 76%, 36%);
+  --warning: hsl(38, 92%, 50%);
+  --warning-bg: hsl(48, 96%, 89%);
+  --warning-border: hsl(38, 92%, 50%);
+  --danger: hsl(0, 84%, 60%);
+  --danger-bg: hsl(0, 93%, 94%);
+  --danger-border: hsl(0, 84%, 60%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(221, 83%, 53%);
+  --primary-foreground: hsl(210, 40%, 98%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, hsl(210, 40%, 98%) 0%, hsl(220, 13%, 91%) 100%);
+    min-height: 100vh;
+  }
+  
+  [dir="rtl"] {
+    direction: rtl;
+  }
+}
+
+@layer components {
+  .hero-section {
+    background: linear-gradient(135deg, var(--hero-gradient-start) 0%, var(--hero-gradient-end) 100%);
+    color: white;
+    padding: 4rem 0 3rem 0;
+  }
+  
+  .main-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: none;
+    margin-top: -2rem;
+  }
+  
+  .analysis-card {
+    border-radius: 12px;
+    border: none;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .analysis-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.15);
+  }
+  
+  .result-reliable {
+    background: linear-gradient(135deg, var(--success-bg) 0%, hsl(140, 81%, 94%) 100%);
+    border-left: 4px solid var(--success-border);
+  }
+  
+  .result-questionable {
+    background: linear-gradient(135deg, var(--warning-bg) 0%, hsl(48, 100%, 86%) 100%);
+    border-left: 4px solid var(--warning-border);
+  }
+  
+  .result-misinformation {
+    background: linear-gradient(135deg, var(--danger-bg) 0%, hsl(0, 86%, 91%) 100%);
+    border-left: 4px solid var(--danger-border);
+  }
+  
+  .btn-analyze {
+    background: linear-gradient(135deg, var(--hero-gradient-start) 0%, var(--hero-gradient-end) 100%);
+    border: none;
+    padding: 12px 32px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-analyze:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 16px hsl(221, 83%, 53%, 0.3);
+    background: linear-gradient(135deg, var(--hero-gradient-end) 0%, hsl(230, 81%, 44%) 100%);
+  }
+  
+  .stats-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .stats-card:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 2rem 0 1.5rem 0;
+    }
+    
+    .main-card {
+      margin-top: -1rem;
+    }
+  }
+}
