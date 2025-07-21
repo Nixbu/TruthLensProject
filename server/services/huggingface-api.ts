@@ -11,8 +11,12 @@ interface ClassificationResponse extends HuggingFaceResponse {
   // Text classification specific response
 }
 
-const HF_API_TOKEN = process.env.HUGGINGFACE_API_TOKEN || process.env.HF_API_TOKEN || "";
+const HF_API_TOKEN = process.env.HUGGINGFACE_API_TOKEN || "";
 const HF_API_URL = "https://api-inference.huggingface.co/models";
+
+if (!HF_API_TOKEN) {
+  console.warn("Warning: HUGGINGFACE_API_TOKEN not found. AI analysis will use fallback methods.");
+}
 
 export class HuggingFaceAPI {
   private async query(modelName: string, data: any): Promise<any> {
@@ -33,43 +37,41 @@ export class HuggingFaceAPI {
   }
 
   async analyzeSentiment(text: string, language: string = "en"): Promise<SentimentResponse[]> {
-    // Use multilingual sentiment model or language-specific model
-    const model = language === "he" ? 
-      "avichr/heBERT_sentiment_analysis" :
-      "cardiffnlp/twitter-roberta-base-sentiment-latest";
+    // Use reliable sentiment analysis model
+    const model = "cardiffnlp/twitter-roberta-base-sentiment";
     
     try {
       const result = await this.query(model, { inputs: text });
       return Array.isArray(result) ? result : [result];
     } catch (error) {
-      // Fallback to English model if Hebrew model fails
-      if (language === "he") {
-        const fallbackResult = await this.query("cardiffnlp/twitter-roberta-base-sentiment-latest", { inputs: text });
-        return Array.isArray(fallbackResult) ? fallbackResult : [fallbackResult];
-      }
+      console.error("Sentiment analysis failed:", error);
       throw error;
     }
   }
 
-  async classifyText(text: string): Promise<ClassificationResponse[]> {
-    // Use a general text classification model
+  async classifyText(text: string): Promise<any> {
+    // Use zero-shot classification model
     const model = "facebook/bart-large-mnli";
     
     const candidateLabels = [
       "factual news",
       "opinion",
-      "misinformation",
+      "misinformation", 
       "propaganda",
       "neutral information",
       "biased content"
     ];
 
-    const result = await this.query(model, {
-      inputs: text,
-      parameters: { candidate_labels: candidateLabels }
-    });
-
-    return result;
+    try {
+      const result = await this.query(model, {
+        inputs: text,
+        parameters: { candidate_labels: candidateLabels }
+      });
+      return result;
+    } catch (error) {
+      console.error("Text classification failed:", error);
+      throw error;
+    }
   }
 
   async detectBias(text: string): Promise<number> {
@@ -80,11 +82,14 @@ export class HuggingFaceAPI {
       // Calculate bias score based on classification results
       let biasScore = 0;
       
-      if (Array.isArray(classification.labels)) {
+      if (classification && typeof classification === 'object' && 'labels' in classification) {
         const biasLabels = ["opinion", "propaganda", "biased content"];
-        classification.labels.forEach((label: string, index: number) => {
+        const labels = classification.labels as string[];
+        const scores = classification.scores as number[];
+        
+        labels.forEach((label: string, index: number) => {
           if (biasLabels.some(biasLabel => label.toLowerCase().includes(biasLabel))) {
-            biasScore += classification.scores[index] * 100;
+            biasScore += scores[index] * 100;
           }
         });
       }
@@ -103,9 +108,12 @@ export class HuggingFaceAPI {
       // Calculate factuality score
       let factualityScore = 50; // Default neutral score
       
-      if (Array.isArray(classification.labels)) {
-        classification.labels.forEach((label: string, index: number) => {
-          const score = classification.scores[index] * 100;
+      if (classification && typeof classification === 'object' && 'labels' in classification) {
+        const labels = classification.labels as string[];
+        const scores = classification.scores as number[];
+        
+        labels.forEach((label: string, index: number) => {
+          const score = scores[index] * 100;
           
           if (label.toLowerCase().includes("factual") || label.toLowerCase().includes("neutral")) {
             factualityScore += score;

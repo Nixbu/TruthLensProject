@@ -22,22 +22,22 @@ export default function AnalysisResults({ result }: AnalysisResultsProps) {
   const getResultTitle = () => {
     switch (result.category) {
       case "reliable":
-        return "תוכן אמין";
+        return "Reliable Content";
       case "questionable":
-        return "תוכן מפוקפק";
+        return "Questionable Content";
       case "misinformation":
-        return "חשד לדיסאינפורמציה";
+        return "Potential Misinformation";
     }
   };
 
   const getResultDescription = () => {
     switch (result.category) {
       case "reliable":
-        return "הטקסט שהוזן נראה אמין ומבוסס על מקורות מוכרים. לא זוהו סימני הטיה משמעותיים או טענות לא מבוססות.";
+        return "The text appears to be reliable and based on credible sources. No significant bias indicators or unsupported claims were detected.";
       case "questionable":
-        return "זוהו סימני הטיה אפשריים או חוסר במקורות אמינים. מומלץ לבדוק מקורות נוספים לפני שיתוף.";
+        return "Possible bias indicators or lack of reliable sources detected. It's recommended to check additional sources before sharing.";
       case "misinformation":
-        return "זוהו סימנים חזקים לאפשרות של מידע מטעה או לא מדויק. מומלץ בחריפות להימנע משיתוף תוכן זה.";
+        return "Strong indicators of potentially misleading or inaccurate information detected. It's strongly recommended to avoid sharing this content.";
     }
   };
 
@@ -66,7 +66,7 @@ export default function AnalysisResults({ result }: AnalysisResultsProps) {
   return (
     <div className="flex justify-center mt-6">
       <div className="w-full max-w-4xl">
-        <h4 className="text-2xl font-bold text-center mb-6">תוצאות הניתוח</h4>
+        <h4 className="text-2xl font-bold text-center mb-6">Analysis Results</h4>
         
         <Card className={`analysis-card result-${result.category}`}>
           <CardContent className="p-6">
@@ -90,8 +90,8 @@ export default function AnalysisResults({ result }: AnalysisResultsProps) {
                   {result.analysis.positivePoints.length > 0 && (
                     <div>
                       <h6 className="font-semibold text-green-700 mb-2">
-                        <CheckCircle className="inline ml-1" size={16} />
-                        נקודות חיוביות:
+                        <CheckCircle className="inline mr-1" size={16} />
+                        Positive Points:
                       </h6>
                       <ul className="space-y-1">
                         {result.analysis.positivePoints.map((point, index) => (
@@ -104,8 +104,8 @@ export default function AnalysisResults({ result }: AnalysisResultsProps) {
                   {result.analysis.warningPoints.length > 0 && (
                     <div>
                       <h6 className="font-semibold text-yellow-700 mb-2">
-                        <AlertTriangle className="inline ml-1" size={16} />
-                        {result.category === "misinformation" ? "סימני סכנה:" : "נקודות לתשומת לב:"}
+                        <AlertTriangle className="inline mr-1" size={16} />
+                        {result.category === "misinformation" ? "Warning Signs:" : "Points of Concern:"}
                       </h6>
                       <ul className="space-y-1">
                         {result.analysis.warningPoints.map((point, index) => (
@@ -118,7 +118,7 @@ export default function AnalysisResults({ result }: AnalysisResultsProps) {
                   {result.analysis.recommendations.length > 0 && (
                     <div className="md:col-span-2">
                       <h6 className="font-semibold text-blue-700 mb-2">
-                        המלצות:
+                        Recommendations:
                       </h6>
                       <ul className="space-y-1">
                         {result.analysis.recommendations.map((rec, index) => (
@@ -137,29 +137,29 @@ export default function AnalysisResults({ result }: AnalysisResultsProps) {
         <Card className="mt-4">
           <CardContent className="p-4">
             <h6 className="font-semibold mb-3">
-              <Cpu className="inline ml-1" size={16} />
-              פרטי ניתוח AI
+              <Cpu className="inline mr-1" size={16} />
+              AI Analysis Details
             </h6>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div>
-                <div className="text-gray-500 mb-1">מודל בינה מלאכותית:</div>
+                <div className="text-gray-500 mb-1">AI Model:</div>
                 <div className="font-medium">{result.analysis.model}</div>
               </div>
               <div>
-                <div className="text-gray-500 mb-1">זמן ניתוח:</div>
-                <div className="font-medium">{result.analysis.processingTime.toFixed(1)} שניות</div>
+                <div className="text-gray-500 mb-1">Processing Time:</div>
+                <div className="font-medium">{result.analysis.processingTime.toFixed(1)} seconds</div>
               </div>
               <div>
-                <div className="text-gray-500 mb-1">רמת ביטחון:</div>
+                <div className="text-gray-500 mb-1">Confidence Level:</div>
                 <div className="font-medium">{result.analysis.confidenceLevel}%</div>
               </div>
               <div>
-                <div className="text-gray-500 mb-1">ציון הטיה:</div>
+                <div className="text-gray-500 mb-1">Bias Score:</div>
                 <div className="font-medium">{result.biasScore}%</div>
               </div>
             </div>
             <div className="mt-4 text-xs text-gray-500">
-              הערת אחריות: תוצאות אלו מבוססות על ניתוח אוטומטי ואינן מהווות תחליף לבדיקה עצמאית של מקורות.
+              Disclaimer: These results are based on automated analysis and do not replace independent verification of sources.
             </div>
           </CardContent>
         </Card>

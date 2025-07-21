@@ -3,23 +3,23 @@ import { Badge } from "@/components/ui/badge";
 
 const examples = [
   {
-    category: "ציוצים פוליטיים",
-    text: "הממשלה הסתירה מאיתנו את האמת על...",
-    result: "חשד להטיה",
+    category: "Political Tweets",
+    text: "The government is hiding the truth about...",
+    result: "Bias Detected",
     variant: "secondary" as const,
     color: "text-yellow-600"
   },
   {
-    category: "כותרות חדשותיות",
-    text: "מחקר חדש מראה ירידה של 15% בזיהום האוויר",
-    result: "אמין",
+    category: "News Headlines",
+    text: "New study shows 15% reduction in air pollution",
+    result: "Reliable",
     variant: "default" as const,
     color: "text-green-600"
   },
   {
-    category: "פוסטים ברשתות",
-    text: "רופאים לא רוצים שתדעו על התרופה הזאת...",
-    result: "דיסאינפורמציה",
+    category: "Social Media Posts",
+    text: "Doctors don't want you to know about this cure...",
+    result: "Misinformation",
     variant: "destructive" as const,
     color: "text-red-600"
   }
@@ -30,7 +30,7 @@ export default function ExamplesSection() {
     <div className="mb-12">
       <Card>
         <CardContent className="p-6">
-          <h5 className="text-xl font-bold text-center mb-6">דוגמאות לשימוש</h5>
+          <h5 className="text-xl font-bold text-center mb-6">Usage Examples</h5>
           <div className="grid md:grid-cols-3 gap-4">
             {examples.map((example, index) => (
               <div key={index} className="p-4 bg-gray-50 rounded-lg">

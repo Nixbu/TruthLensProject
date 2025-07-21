@@ -4,26 +4,26 @@ import { Search, Scale, Link, TrendingUp } from "lucide-react";
 const features = [
   {
     icon: Search,
-    title: "בדיקת עובדות",
-    description: "אימות טענות מול מקורות אמינים ומסדי נתונים מוכרים",
+    title: "Fact Checking",
+    description: "Verify claims against reliable sources and known databases",
     color: "text-blue-600"
   },
   {
     icon: Scale,
-    title: "זיהוי הטיה",
-    description: "ניתוח שפה ולשון לזיהוי הטיות פוליטיות או אידיאולוגיות",
+    title: "Bias Detection",
+    description: "Analyze language and tone to identify political or ideological biases",
     color: "text-green-600"
   },
   {
     icon: Link,
-    title: "בדיקת מקורות",
-    description: "הערכת איכות ואמינות המקורות המצוטטים או הקשורים",
+    title: "Source Verification",
+    description: "Evaluate the quality and reliability of cited or related sources",
     color: "text-yellow-600"
   },
   {
     icon: TrendingUp,
-    title: "ניתוח רגשות",
-    description: "זיהוי שימוש בשפה רגשית שעלולה להטות את הקורא",
+    title: "Sentiment Analysis",
+    description: "Identify use of emotional language that may bias the reader",
     color: "text-purple-600"
   }
 ];
@@ -32,8 +32,8 @@ export default function FeaturesSection() {
   return (
     <div className="mt-12 mb-12">
       <div className="text-center mb-8">
-        <h3 className="text-2xl font-bold mb-3">מה אנחנו בודקים?</h3>
-        <p className="text-gray-600">הכלי שלנו מנתח מספר היבטים כדי לספק הערכה מדויקת</p>
+        <h3 className="text-2xl font-bold mb-3">What Do We Check?</h3>
+        <p className="text-gray-600">Our tool analyzes multiple aspects to provide accurate assessment</p>
       </div>
       
       <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6">

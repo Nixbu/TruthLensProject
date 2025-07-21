@@ -14,9 +14,9 @@ interface TextAnalysisFormProps {
 }
 
 const sampleTexts = [
-  'ממשלת ישראל מסתירה מאיתנו את האמת על הקורונה!',
-  'מחקר חדש של אוניברסיטת תל אביב מראה ירידה של 15% בזיהום האוויר בגוש דן',
-  'רופאים לא רוצים שתדעו על התרופה הטבעית הזאת שמרפאה הכל!'
+  'The government is hiding the truth about COVID vaccines from us!',
+  'New study by Stanford University shows 15% reduction in air pollution in major cities',
+  'Doctors don\'t want you to know about this natural cure that fixes everything!'
 ];
 
 export default function TextAnalysisForm({ onResult, isAnalyzing, setIsAnalyzing }: TextAnalysisFormProps) {
@@ -29,8 +29,8 @@ export default function TextAnalysisForm({ onResult, isAnalyzing, setIsAnalyzing
     
     if (!content.trim()) {
       toast({
-        title: "שגיאה",
-        description: "אנא הכנס טקסט לניתוח",
+        title: "Error",
+        description: "Please enter text to analyze",
         variant: "destructive",
       });
       return;
@@ -41,21 +41,21 @@ export default function TextAnalysisForm({ onResult, isAnalyzing, setIsAnalyzing
     try {
       const response = await apiRequest("POST", "/api/analyze", {
         content: content.trim(),
-        language: "he"
+        language: "en"
       });
 
       const result: AnalysisResponse = await response.json();
       onResult(result);
       
       toast({
-        title: "ניתוח הושלם בהצלחה",
-        description: "תוצאות הניתוח מוצגות למטה",
+        title: "Analysis Complete",
+        description: "Analysis results are displayed below",
       });
     } catch (error) {
       console.error("Analysis failed:", error);
       toast({
-        title: "שגיאה בניתוח",
-        description: "אירעה שגיאה במהלך ניתוח הטקסט. אנא נסה שנית.",
+        title: "Analysis Error",
+        description: "An error occurred during text analysis. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -71,17 +71,15 @@ export default function TextAnalysisForm({ onResult, isAnalyzing, setIsAnalyzing
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="contentInput" className="text-right font-semibold">
-          תוכן לניתוח:
+        <Label htmlFor="contentInput" className="font-semibold">
+          Content to analyze:
         </Label>
         <Textarea
           id="contentInput"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="הכנס כאן את הטקסט שברצונך לבדוק..."
+          placeholder="Enter the text you want to check here..."
           rows={4}
-          className="text-right"
-          dir="rtl"
         />
         <div className="flex justify-between items-center text-sm text-gray-500">
           <Button
@@ -90,9 +88,9 @@ export default function TextAnalysisForm({ onResult, isAnalyzing, setIsAnalyzing
             size="sm"
             onClick={handleSampleText}
           >
-            השתמש בטקסט לדוגמה
+            Use sample text
           </Button>
-          <span>מומלץ עד 280 תווים לתוצאה טובה ביותר</span>
+          <span>Up to 280 characters recommended for best results</span>
         </div>
       </div>
       
@@ -104,11 +102,11 @@ export default function TextAnalysisForm({ onResult, isAnalyzing, setIsAnalyzing
         >
           {isAnalyzing ? (
             <>
-              <Loader2 className="ml-2 h-4 w-4 animate-spin" />
-              מנתח...
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Analyzing...
             </>
           ) : (
-            "נתח תוכן"
+            "Analyze Content"
           )}
         </Button>
       </div>

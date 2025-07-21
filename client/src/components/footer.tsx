@@ -11,14 +11,14 @@ export default function Footer() {
               <h6 className="font-semibold">TruthLens</h6>
             </div>
             <p className="text-gray-400 text-sm">
-              כלי לזיהוי דיסאינפורמציה באמצעות בינה מלאכותית
+              AI-powered misinformation detection tool
             </p>
           </div>
           <div className="text-right">
             <p className="text-gray-400 text-sm">
-              פותח כחלק מפרויקט אקדמי • 
+              Developed as part of academic project • 
               <a href="#" className="text-white hover:text-gray-300 mx-1">GitHub</a> • 
-              <a href="#" className="text-white hover:text-gray-300 mx-1">תיעוד</a>
+              <a href="#" className="text-white hover:text-gray-300 mx-1">Documentation</a>
             </p>
           </div>
         </div>

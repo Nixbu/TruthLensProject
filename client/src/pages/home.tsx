@@ -22,8 +22,8 @@ export default function Home() {
             <div className="main-card">
               <div className="p-6 lg:p-8">
                 <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold mb-3">בדק את התוכן שלך</h3>
-                  <p className="text-gray-600">הכנס טקסט קצר (ציוץ, כותרת או פוסט) לניתוח</p>
+                  <h3 className="text-2xl font-bold mb-3">Analyze Your Content</h3>
+                  <p className="text-gray-600">Enter short text (tweet, headline, or post) for analysis</p>
                 </div>
                 
                 <TextAnalysisForm

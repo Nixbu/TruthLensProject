@@ -8,8 +8,8 @@ export default function Header() {
           <div className="max-w-4xl">
             <Shield className="mx-auto mb-4" size={48} />
             <h1 className="text-4xl lg:text-5xl font-bold mb-4">TruthLens</h1>
-            <p className="text-xl mb-4 opacity-90">כלי מתקדם לזיהוי דיסאינפורמציה באמצעות בינה מלאכותית</p>
-            <p className="opacity-80">נתח תוכן ברשתות חברתיות, כותרות חדשותיות ופוסטים כדי לזהות מידע מטעה או מוטה</p>
+            <p className="text-xl mb-4 opacity-90">AI-Powered Misinformation Detection Tool</p>
+            <p className="opacity-80">Analyze social media content, news headlines, and posts to detect misleading or biased information</p>
           </div>
         </div>
       </div>

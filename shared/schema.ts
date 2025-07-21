@@ -11,7 +11,7 @@ export const users = pgTable("users", {
 export const analysisRequests = pgTable("analysis_requests", {
   id: serial("id").primaryKey(),
   content: text("content").notNull(),
-  language: text("language").notNull().default("he"),
+  language: text("language").notNull().default("en"),
   reliabilityScore: decimal("reliability_score", { precision: 5, scale: 2 }),
   biasScore: decimal("bias_score", { precision: 5, scale: 2 }),
   sentimentScore: decimal("sentiment_score", { precision: 5, scale: 2 }),
