@@ -27,7 +27,7 @@ export class OpenRouterAPI {
   private baseUrl = "https://openrouter.ai/api/v1/chat/completions";
 
   constructor() {
-    this.apiKey = process.env.OPENROUTER_API_KEY || "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";
+    this.apiKey = process.env.OPENROUTER_API_KEY || "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";
   }
 
   private async makeRequest(model: string, messages: any[]): Promise<OpenRouterResponse> {

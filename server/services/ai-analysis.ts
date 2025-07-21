@@ -1,15 +1,15 @@
-import { DeepSeekAPI } from "./deepseek-api";
+import { OpenRouterAPI } from "./openrouter-api";
 import type { AnalysisResponse } from "@shared/schema";
 
-const deepSeekAPI = new DeepSeekAPI();
+const openRouterAPI = new OpenRouterAPI();
 
 export async function analyzeContent(content: string, language: string = "en"): Promise<AnalysisResponse> {
   const startTime = Date.now();
   
   try {
-    console.log("Using DeepSeek AI for comprehensive analysis...");
+    console.log("Using OpenRouter AI for comprehensive analysis...");
     
-    const result = await deepSeekAPI.analyzeContent(content, language);
+    const result = await openRouterAPI.analyzeContent(content, language);
     
     const processingTime = (Date.now() - startTime) / 1000;
     
@@ -24,11 +24,11 @@ export async function analyzeContent(content: string, language: string = "en"): 
         recommendations: result.recommendations,
         confidenceLevel: result.confidence_level,
         processingTime,
-        model: "DeepSeek AI Chat Model"
+        model: "OpenRouter AI (Llama 3.3 70B/Mistral 7B/DeepSeek R1)"
       }
     };
   } catch (error) {
-    console.error("DeepSeek analysis failed:", error);
+    console.error("OpenRouter analysis failed:", error);
     
     // Fallback to advanced heuristic analysis
     return generateAdvancedHeuristicAnalysis(content, language, startTime);

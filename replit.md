@@ -75,12 +75,13 @@ The application uses two main database tables:
 ## External Dependencies
 
 ### AI Services
-- **OpenRouter API**: Primary AI analysis provider with free daily limits
+- **OpenRouter API**: Primary AI analysis provider (API Key: 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)
 - **Models Used**: Multi-model fallback system
   - `meta-llama/llama-3.3-70b-instruct` (Primary - Most capable)
   - `mistralai/mistral-7b-instruct` (Fallback)
   - `deepseek/deepseek-r1` (Secondary fallback)
-- **Advanced Pattern Analysis**: Sophisticated fallback system with conspiracy detection
+- **Advanced Pattern Analysis**: Sophisticated fallback system with conspiracy detection and bias scoring
+- **Timeout Handling**: Automatic fallback when AI models are unavailable or slow
 
 ### Database
 - **Neon Database**: Serverless PostgreSQL provider
