@@ -1,15 +1,15 @@
-import { OpenRouterAPI } from "./openrouter-api";
+import { GeminiAPI } from "./gemini-api";
 import type { AnalysisResponse } from "@shared/schema";
 
-const openRouterAPI = new OpenRouterAPI();
+const geminiAPI = new GeminiAPI();
 
 export async function analyzeContent(content: string, language: string = "en"): Promise<AnalysisResponse> {
   const startTime = Date.now();
   
   try {
-    console.log("Using OpenRouter AI for comprehensive analysis...");
+    console.log("Using Gemini AI for comprehensive analysis...");
     
-    const result = await openRouterAPI.analyzeContent(content, language);
+    const result = await geminiAPI.analyzeContent(content, language);
     
     const processingTime = (Date.now() - startTime) / 1000;
     
@@ -24,11 +24,11 @@ export async function analyzeContent(content: string, language: string = "en"): 
         recommendations: result.recommendations,
         confidenceLevel: result.confidence_level,
         processingTime,
-        model: "OpenRouter AI (Llama 3.3 70B/Mistral 7B/DeepSeek R1)"
+        model: "Google Gemini 2.5 Flash"
       }
     };
   } catch (error) {
-    console.error("OpenRouter analysis failed:", error);
+    console.error("Gemini analysis failed:", error);
     
     // Fallback to advanced heuristic analysis
     return generateAdvancedHeuristicAnalysis(content, language, startTime);
