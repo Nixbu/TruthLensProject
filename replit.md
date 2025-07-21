@@ -23,7 +23,7 @@ Preferred communication style: Simple, everyday language.
 - **Framework**: Express.js with TypeScript
 - **Database**: PostgreSQL with Drizzle ORM
 - **Database Provider**: Neon Database (serverless PostgreSQL)
-- **AI Integration**: HuggingFace API for text analysis
+- **AI Integration**: OpenRouter API with Llama 3.3 70B, Mistral 7B, and DeepSeek R1 models
 - **Session Management**: PostgreSQL-based session storage
 - **Build System**: Vite for frontend, esbuild for backend
 
@@ -75,11 +75,12 @@ The application uses two main database tables:
 ## External Dependencies
 
 ### AI Services
-- **HuggingFace API**: Primary AI analysis provider
-- **Models Used**:
-  - `avichr/heBERT_sentiment_analysis` (Hebrew sentiment)
-  - `cardiffnlp/twitter-roberta-base-sentiment-latest` (English fallback)
-  - Custom bias detection and factuality models
+- **OpenRouter API**: Primary AI analysis provider with free daily limits
+- **Models Used**: Multi-model fallback system
+  - `meta-llama/llama-3.3-70b-instruct` (Primary - Most capable)
+  - `mistralai/mistral-7b-instruct` (Fallback)
+  - `deepseek/deepseek-r1` (Secondary fallback)
+- **Advanced Pattern Analysis**: Sophisticated fallback system with conspiracy detection
 
 ### Database
 - **Neon Database**: Serverless PostgreSQL provider
